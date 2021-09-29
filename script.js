@@ -7,10 +7,14 @@ const tareas = [];
 function crearTarea() {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
+        limpiarHtml();
         let task = tarea.value;
         tareas.push({'id': Date.now(), 'tarea' :task, estado : false})
-        crearTareaHtml(tareas[0].tarea)
-        console.log(tareas);
+        tareas.forEach(e => {
+            crearTareaHtml(e.tarea)
+        });
+        
+        //console.log(tareas);
     });
 }
 
@@ -23,6 +27,11 @@ function crearTareaHtml(t){
     resultado.appendChild(nuevoParrafo);
 };
 
+function limpiarHtml(){
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild);
+    }
+}
 
 //Registrar tarea en arreglo
 
