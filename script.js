@@ -22,6 +22,7 @@ function AgregarTarea(e) {
     let task = tareaInpu.value;
     tareas.push({ 'id': Date.now(), 'tarea': task, estado: false });
     crearTareaHtml();
+    form.reset();
 
 }
 
