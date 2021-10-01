@@ -79,7 +79,7 @@ function error(){
     setTimeout(function(){
         tareaInpu.classList.remove('error')
 
-    }, 3000)
+    }, 4000)
 }
 
 documentoCargado();
