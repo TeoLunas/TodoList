@@ -1,6 +1,7 @@
 const tareaInpu = document.getElementById('tarea');
 const form = document.getElementById('form-data');
 const resultado = document.getElementById('tareasPorHacer');
+const inputTask = document.getElementById('inputTask');
 
 let tareas = [];
 
@@ -20,10 +21,15 @@ function AgregarTarea(e) {
     e.preventDefault()
     limpiarHtml();
     let task = tareaInpu.value;
-    tareas.push({ 'id': Date.now(), 'tarea': task, estado: false });
-    crearTareaHtml();
-    form.reset();
-
+    if(task === ""){
+        error();
+        crearTareaHtml();
+        form.reset();
+    }else{
+        tareas.push({ 'id': Date.now(), 'tarea': task, estado: false });
+        crearTareaHtml();
+        form.reset();
+    }
 }
 
 //Crear HTML para mostrar tarea.
@@ -68,7 +74,12 @@ function limpiarHtml() {
     }
 }
 
-//Registrar tarea en arreglo
+function error(){
+    tareaInpu.classList.add('error')
+    setTimeout(function(){
+        tareaInpu.classList.remove('error')
 
+    }, 3000)
+}
 
 documentoCargado();
