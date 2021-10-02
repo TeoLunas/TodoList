@@ -82,6 +82,7 @@ function crearTareaHtml() {
             resultado.appendChild(div)
             if (e.estado === true) {
                 div.classList.add('tareaCompleta');
+                div.removeChild(iconoCompletar)
                 tareasCompletadas.appendChild(div);
                
             }
@@ -97,7 +98,7 @@ function enviarDatosLS() {
 
 function limpiarHtml() {
     while (resultado.firstChild) {
-        resultado.removeChild(resultado.firstChild);
+        resultado.removeChild(resultado.lastChild);
     }
 }
 
