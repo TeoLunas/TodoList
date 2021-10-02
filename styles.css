@@ -17,6 +17,7 @@ body{
 }
 
 .form-data{
+    width: 100%;
     display: flex;
 }
 
