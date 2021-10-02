@@ -5,6 +5,8 @@ const inputTask = document.getElementById('inputTask');
 const totalTareas = document.getElementById('totalTareas');
 const tareasCompletadas = document.getElementById('tareasCompletadas');
 
+
+
 let tareas = [];
 let tareasTerminadas = [];
 
@@ -14,6 +16,8 @@ function documentoCargado() {
     document.addEventListener('DOMContentLoaded', function () {
 
         tareas = JSON.parse(localStorage.getItem('task')) || [];
+
+        cantidad();
         
         crearTareaHtml();
 
@@ -32,6 +36,8 @@ function AgregarTarea(e) {
         tareas.push({ 'id': Date.now(), 'tarea': task, estado: false });
         crearTareaHtml();
         form.reset();
+        cleanN();
+        cantidad();
     }
 }
 
@@ -96,11 +102,16 @@ function limpiarHtml() {
 }
 
 function clean(){
-    while(tareasCompletadas.firstChild){
-        tareasCompletadas.removeChild(tareasCompletadas.firstChild);
+    while(tareasCompletadas.lastChild){
+        tareasCompletadas.removeChild(tareasCompletadas.lastChild);
     }
 }
 
+function cleanN(){
+    while(totalTareas.lastChild){
+        totalTareas.removeChild(totalTareas.lastChild)
+    }
+}
 
 function error() {
     tareaInpu.classList.add('error')
@@ -126,8 +137,15 @@ function completarTarea(id) {
 function cantidad(){
     let t = tareas.length;
     console.log(t);
+    
+    let parrafoss = document.createElement('span');
+    let contenidoss = document.createTextNode(t);
 
-    totalTareas.value(t)
+    parrafoss.appendChild(contenidoss);
+
+    totalTareas.appendChild(parrafoss)
+
+
 }
 
 documentoCargado();

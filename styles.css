@@ -36,6 +36,7 @@ h3{
     padding: 18px;
     margin: 6px 0;
     overflow: hidden;
+    border-left: 30px solid yellow;
 }
 
 .task i{
@@ -71,5 +72,5 @@ button:hover{
 }
 
 .tareaCompleta{
-    background: green;
+    border-left: 30px solid green;
 }
