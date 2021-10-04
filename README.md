@@ -1,3 +1,3 @@
 # TodoList
 
-[Live Demo](teolunas.github.io/todolist/)  
+[Live Demo](https://teolunas.github.io/TodoList/)  
