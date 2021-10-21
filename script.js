@@ -55,21 +55,23 @@ function crearTareaHtml() {
             const iconoCompletar = document.createElement('a');
             const iconoEliminar = document.createElement('a');
 
+            iconoCompletar.onclick = () => {
+                completarTarea(e.id);
+            }
+
+            iconoEliminar.onclick = () => {
+                eliminarTask(e.id);
+            }
 
             const contenidoParrafo = document.createTextNode(e.tarea);
 
             div.classList.add('task');
-            //iconoUno.classList.add('far', 'fa-check-square');
-            //iconoDos.classList.add('fas', 'fa-trash');
+            
             iconoCompletar.classList.add('far', 'fa-check-square');
             iconoEliminar.classList.add('fas', 'fa-trash');
 
             iconoCompletar.setAttribute('id', e.id)
             iconoEliminar.setAttribute('id', e.id)
-
-            iconoCompletar.onclick = () => {
-                completarTarea(e.id);
-            }
 
             parrafo.appendChild(contenidoParrafo);
 
@@ -77,14 +79,16 @@ function crearTareaHtml() {
             //div.appendChild(iconoUno);
             //div.appendChild(iconoDos);
             div.appendChild(iconoCompletar);
+            
+            iconoEliminar.onclick
+
             div.appendChild(iconoEliminar);
 
             resultado.appendChild(div)
-            if (e.estado === true) {
+            if(e.estado === true) {
                 div.classList.add('tareaCompleta');
                 div.removeChild(iconoCompletar)
                 tareasCompletadas.appendChild(div);
-               
             }
         })
     }
@@ -108,11 +112,6 @@ function clean(){
     }
 }
 
-function cleanN(){
-    while(totalTareas.lastChild){
-        totalTareas.removeChild(totalTareas.lastChild)
-    }
-}
 
 function error() {
     tareaInpu.classList.add('error')
@@ -135,7 +134,18 @@ function completarTarea(id) {
 
 }
 
-function cantidad(){
+const eliminarTask = (id) => {
+    tareas = tareas.filter( (tarea) => tarea.id != id)
+    
+    clean();
+    limpiarHtml();
+    crearTareaHtml();
+    enviarDatosLS();
+    //cantidad();
+
+}
+
+/* function cantidad(){
     let t = tareas.length;
     console.log(t);
     
@@ -146,7 +156,8 @@ function cantidad(){
 
     totalTareas.appendChild(parrafoss)
 
+} */
 
-}
+
 
 documentoCargado();
