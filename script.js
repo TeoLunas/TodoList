@@ -1,4 +1,4 @@
-const tareaInpu = document.getElementById('tarea');
+const tareaInput = document.getElementById('tarea');
 const form = document.getElementById('form-data');
 const resultado = document.getElementById('tareasPorHacer');
 const inputTask = document.getElementById('inputTask');
@@ -17,15 +17,16 @@ function documentoCargado() {
 
         tareas = JSON.parse(localStorage.getItem('task')) || [];
 
-        //cantidad();
         crearTareaHtml();
+
+
     })
 }
 
 function AgregarTarea(e) {
     e.preventDefault()
     limpiarHtml();
-    let task = tareaInpu.value;
+    let task = tareaInput.value;
     if (task === "") {
         error();
         crearTareaHtml();
@@ -66,7 +67,7 @@ function crearTareaHtml() {
             const contenidoParrafo = document.createTextNode(e.tarea);
 
             div.classList.add('task');
-            
+
             iconoCompletar.classList.add('far', 'fa-check-square');
             iconoEliminar.classList.add('fas', 'fa-trash');
 
@@ -81,15 +82,11 @@ function crearTareaHtml() {
             divIconos.appendChild(iconoCompletar);
             divIconos.appendChild(iconoEliminar);
 
-            //div.appendChild(iconoCompletar);
-            
-            //div.appendChild(iconoEliminar);
-
             //Agregar divIconos al div principal
             div.appendChild(divIconos);
 
             resultado.appendChild(div)
-            if(e.estado === true) {
+            if (e.estado === true) {
                 div.classList.add('tareaCompleta');
                 divIconos.removeChild(iconoCompletar)
                 tareasCompletadas.appendChild(div);
@@ -97,10 +94,12 @@ function crearTareaHtml() {
         })
     }
     enviarDatosLS();
+    cantidad();
 }
 
 function enviarDatosLS() {
     localStorage.setItem('task', JSON.stringify(tareas));
+
 }
 
 function limpiarHtml() {
@@ -109,18 +108,17 @@ function limpiarHtml() {
     }
 }
 
-function clean(){
-    while(tareasCompletadas.lastChild){
+function clean() {
+    while (tareasCompletadas.lastChild) {
         tareasCompletadas.removeChild(tareasCompletadas.lastChild);
     }
 }
 
 
 function error() {
-    tareaInpu.classList.add('error')
+    tareaInput.classList.add('error')
     setTimeout(function () {
-        tareaInpu.classList.remove('error')
-
+        tareaInput.classList.remove('error')
     }, 4000)
 }
 
@@ -139,33 +137,39 @@ function completarTarea(id) {
 
 const eliminarTask = (id) => {
     let opcion = confirm('Quieres eliminar la tarea?');
-    if(opcion){
-        tareas = tareas.filter( (tarea) => tarea.id != id)
-    }else{
+    if (opcion) {
+        tareas = tareas.filter((tarea) => tarea.id != id)
+    } else {
 
     }
-    
+
     clean();
     limpiarHtml();
     crearTareaHtml();
     enviarDatosLS();
-    //cantidad();
-
 }
 
-/* function cantidad(){
+function cantidad() {
     let t = tareas.length;
     console.log(t);
-    
+
     let parrafoss = document.createElement('span');
     let contenidoss = document.createTextNode(t);
 
     parrafoss.appendChild(contenidoss);
 
     totalTareas.appendChild(parrafoss)
+    
+    cleanN();
 
-} */
+}
 
-
+function cleanN() {
+    let nodos = totalTareas.childNodes;
+    console.log(nodos);
+    if(nodos.length > 1){
+        totalTareas.removeChild(totalTareas.firstChild)
+    }  
+}
 
 documentoCargado();
