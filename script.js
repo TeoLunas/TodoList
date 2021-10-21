@@ -18,9 +18,7 @@ function documentoCargado() {
         tareas = JSON.parse(localStorage.getItem('task')) || [];
 
         //cantidad();
-        
         crearTareaHtml();
-
     })
 }
 
@@ -34,10 +32,9 @@ function AgregarTarea(e) {
         form.reset();
     } else {
         tareas.push({ 'id': Date.now(), 'tarea': task, estado: false });
+        clean();
         crearTareaHtml();
         form.reset();
-        cleanN();
-        cantidad();
     }
 }
 
@@ -50,10 +47,13 @@ function crearTareaHtml() {
         tareas.forEach(e => {
             const div = document.createElement('div');
             const parrafo = document.createElement('p');
-            //const iconoUno = document.createElement('i');
-            //const iconoDos = document.createElement('i');
             const iconoCompletar = document.createElement('a');
             const iconoEliminar = document.createElement('a');
+
+            //Div para dar estilo a iconos
+            const divIconos = document.createElement('div');
+            //Clase para dar estilo a divIconos
+            divIconos.classList.add('seccionIconos')
 
             iconoCompletar.onclick = () => {
                 completarTarea(e.id);
@@ -76,23 +76,26 @@ function crearTareaHtml() {
             parrafo.appendChild(contenidoParrafo);
 
             div.appendChild(parrafo);
-            //div.appendChild(iconoUno);
-            //div.appendChild(iconoDos);
-            div.appendChild(iconoCompletar);
-            
-            iconoEliminar.onclick
 
-            div.appendChild(iconoEliminar);
+            //Agregar a divIconos iconos
+            divIconos.appendChild(iconoCompletar);
+            divIconos.appendChild(iconoEliminar);
+
+            //div.appendChild(iconoCompletar);
+            
+            //div.appendChild(iconoEliminar);
+
+            //Agregar divIconos al div principal
+            div.appendChild(divIconos);
 
             resultado.appendChild(div)
             if(e.estado === true) {
                 div.classList.add('tareaCompleta');
-                div.removeChild(iconoCompletar)
+                divIconos.removeChild(iconoCompletar)
                 tareasCompletadas.appendChild(div);
             }
         })
     }
-
     enviarDatosLS();
 }
 
@@ -135,7 +138,12 @@ function completarTarea(id) {
 }
 
 const eliminarTask = (id) => {
-    tareas = tareas.filter( (tarea) => tarea.id != id)
+    let opcion = confirm('Quieres eliminar la tarea?');
+    if(opcion){
+        tareas = tareas.filter( (tarea) => tarea.id != id)
+    }else{
+
+    }
     
     clean();
     limpiarHtml();
