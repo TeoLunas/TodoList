@@ -17,7 +17,7 @@ function documentoCargado() {
 
         tareas = JSON.parse(localStorage.getItem('task')) || [];
 
-        cantidad();
+        //cantidad();
         
         crearTareaHtml();
 
