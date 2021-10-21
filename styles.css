@@ -8,12 +8,19 @@
 body{
     background: #008080;
     min-height: 100vh;
+    color: hsl(234, 39%, 85%);
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: hsl(235, 21%, 11%);
 }
 
 .container{
-    max-width: 800px;
+    max-width: 600px;
     margin: auto;
+    margin-top: 100px;
     padding: 10px;
+    background-color: hsl(235, 24%, 19%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 20px 30px;
+    border-radius: 10px;
 }
 
 .form-data{
@@ -56,19 +63,29 @@ h3{
 
 .task{
     width: 100%;
-    background: rgba(255,255, 255, 0.5);
+    background-color: hsl(235, 24%, 19%);
     padding: 18px;
     margin: 6px 0;
     overflow: hidden;
+    border: 1px solid hsl(234, 39%, 85%);
     border-left: 30px solid yellow;
+    /* dando estilo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.task i{
-    float: right;
-    margin-left: 20px;
-    cursor: pointer;
-    font-size: 25px;
+.seccionIconos{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
 }
+
+.seccionIconos a{
+    font-size: 24px;
+    color: hsl(234, 39%, 85%);
+    margin-top: 10px;
+} 
 
 .task p{
     font-size: 25px;
